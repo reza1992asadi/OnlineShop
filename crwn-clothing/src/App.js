@@ -38,5 +38,4 @@ export default function App() {
         <CategoryItem key={category.id} category={category}/> 
       ))}  
     </div>); 
-
-  };
+};
