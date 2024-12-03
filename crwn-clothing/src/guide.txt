@@ -1,0 +1,4 @@
+what is routing? routing is when you want to get to different parts of your application with specific URLs, 
+So far when ever you coded anything, all you did was to render everything on localhost:3000 and then you clicked
+on different buttons of your app that got you to different places. But with this method you can type in a url 
+that gets you to a specific page. which is cool, isn't it? 
