@@ -2,3 +2,45 @@ what is routing? routing is when you want to get to different parts of your appl
 So far when ever you coded anything, all you did was to render everything on localhost:3000 and then you clicked
 on different buttons of your app that got you to different places. But with this method you can type in a url 
 that gets you to a specific page. which is cool, isn't it? 
+
+first you need to import {BrowserRouter} from 'react-router-dom'; 
+wrap you app in it. 
+<BrowserRouter>
+    <App /> 
+<BrowserRouter> 
+
+you build a folder where you keep your route level component. they are only used for routing. 
+
+this is how to make your component routable: 
+
+first you need to import {route,routes} from 'react-router-dom'; 
+
+const App = () => {
+  return (
+    <Routes>
+      <Route path='/' element= {<Home />} />
+    </Routes>
+);
+};
+
+now lets imagine you want to have a navbar on top which is fixed, and on bottom you are going to display the 
+routes available to you. what are you going to do? here you need to use nested routes. 
+
+route nesting is really not that difficult it might seem confusing at first, But its really not hard. just keep
+mind that its a parent child relation that you should build. 
+<Routes>
+  <Route path='/' element={<Nav />}> 
+    <Route path='shop' element={<shop />} /> 
+  </Route>
+</Routes>
+
+we then use  <outlset /> whenever you need to show the rest of the Route. to be honest, I don't get it right now, 
+but just memorize how it works. 
+
+
+*we can use a fragment instead of a <div>. fragment is a react component, when we use fragment it actually 
+renders to nothing, when it gets mounted on the dom. in react components must have a top level parent. when we
+want to render nothing on to the dom then we can use fragment, so we have created a top level parent for our 
+component, but at the same time nothing has been rendered to dom. I am not aware if this has any other benefits 
+that we are not aware of. 
+
