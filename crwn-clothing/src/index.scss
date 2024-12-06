@@ -10,7 +10,11 @@ code {
     monospace;
 }
 
-a {
-  text-align: none;
-  color: black; 
+a { 
+  text-decoration: none; 
+  color: black;
+}
+
+* { 
+  box-sizing: border-box;
 }
