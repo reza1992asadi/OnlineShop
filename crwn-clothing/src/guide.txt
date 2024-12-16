@@ -45,3 +45,82 @@ component, but at the same time nothing has been rendered to dom. I am not aware
 that we are not aware of. 
 *you need to import it first in order to be able to use it. import {fragment} form 'react'; 
 
+***********************************************************************************************
+***********************************************************************************************
+Firebase: 
+
+for installing firebase on your system, just do yarn add firebase or npm install firebase 
+
+to be able to use firebase in your project, you need to initialize it first in your program. in your 
+source create a folder for example utils/firebase/firebase.utils.js in that you need to write: 
+
+import {initializeApp} from 'firebase/app' 
+
+* firebase is a suite of tools. you bring this suite from the library through a thing called app. 
+for that you need the initializeapp function, this function will create an instance of app based off of 
+some config. this config is an object that allows us to attach firebase app instance to the firbase 
+instance that we have online. 
+
+then on firebase website project, you choose web, choose a name and set up your firbase web instance online
+then you  copy the config file and paste is bellow the import line. 
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHmjungxBz6bebJi7tjAIHDx3NkQACD44",
+  authDomain: "crown-clothing-db-cd733.firebaseapp.com",
+  projectId: "crown-clothing-db-cd733",
+  storageBucket: "crown-clothing-db-cd733.firebasestorage.app",
+  messagingSenderId: "850973645781",
+  appId: "1:850973645781:web:a49aa77b934ee82d19fb5c"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+this will be how it looks, as you can see, 
+
+as said earlier, firbase suite has multiple features the next one that we want to imoprt depending on 
+your needs is from 'firebase/auth' you get libraries such as getAuth, signinwithredirect, googlesignin
+githubsignin and things such as that. 
+
+inorder to use this google authintication method, first we need to initialize it. 
+const provider = new GoogleAuthProvider(); then we call setcustom parameters on provider. so we can tell
+our googleauth provider how we want it to behave. the main one that we want is select_account. 
+
+the last two lines are the main part: here is an explanation from chatgpt: 
+
+export const auth = getAuth() ; 
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider); 
+
+Key Concepts
+
+getAuth():
+
+This is a function from Firebase's authentication module that initializes Firebase Authentication.
+It returns an auth object that provides methods to sign in, sign out, and check the authentication state (like signInWithPopup and signInWithRedirect).
+
+GoogleAuthProvider:
+
+This is a class that represents the Google provider for Firebase Authentication.
+It allows Firebase to use Google as an authentication method, so users can sign in with their Google accounts.
+You create an instance of GoogleAuthProvider to configure Google sign-in settings (like forcing the user to select an account every time they sign in).
+
+signInWithPopup():
+
+This function is used to sign the user in through a popup.
+It requires two things:
+The auth object (which manages Firebase Authentication).
+The provider (in this case, the GoogleAuthProvider), which tells Firebase that we want to use Google for authentication.
+
+Putting It All Together
+Firebase Authentication (auth) manages the user's authentication state.
+Google Authentication (GoogleAuthProvider) specifies that Google will be used for authentication.
+signInWithPopup(auth, provider) triggers the Google sign-in process using a popup window.
+So yes, you're right: the code is using Firebase Authentication, the Google provider, and the popup method together to create a seamless Google sign-in process.
+
+The signInWithGooglePopup function is just a convenient wrapper around signInWithPopup(auth, provider) to make it easier to use in your app.
+
+FireStore database: is the actual database that we are going  to store our data in. in firestore data is stored as data in documents which are in collections. 
+
+now for the database side we also need to import some libraries. you need getfirestore for initialization
+doc to get the documents getdoc to get the data, setdoc to write data. So its going to look like this: 
+import {getfirestore, doc, getDoc, setDoc} from 'firebase/firestore'
