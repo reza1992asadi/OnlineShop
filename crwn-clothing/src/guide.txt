@@ -78,7 +78,7 @@ const app = initializeApp(firebaseConfig);
 
 this will be how it looks, as you can see, 
 
-as said earlier, firbase suite has multiple features the next one that we want to imoprt depending on 
+as said earlier, firbase suite has multiple features the next one thatf we want to imoprt depending on 
 your needs is from 'firebase/auth' you get libraries such as getAuth, signinwithredirect, googlesignin
 githubsignin and things such as that. 
 
@@ -119,8 +119,13 @@ So yes, you're right: the code is using Firebase Authentication, the Google prov
 
 The signInWithGooglePopup function is just a convenient wrapper around signInWithPopup(auth, provider) to make it easier to use in your app.
 
+*************************
+
 FireStore database: is the actual database that we are going  to store our data in. in firestore data is stored as data in documents which are in collections. 
 
 now for the database side we also need to import some libraries. you need getfirestore for initialization
 doc to get the documents getdoc to get the data, setdoc to write data. So its going to look like this: 
 import {getfirestore, doc, getDoc, setDoc} from 'firebase/firestore'
+
+then we write export const db = getfirestore(); 
+we export it so we can use the database elsewhere;
