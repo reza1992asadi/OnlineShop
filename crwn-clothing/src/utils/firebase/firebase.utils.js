@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app' ; 
-import {getAuth, signInWithRedirect, signInWithPopup , GoogleAuthProvider} from 'firebase/auth' ; 
+import {getAuth, signInWithPopup , GoogleAuthProvider} from 'firebase/auth' ; 
 import {getFirestore,doc,getDoc,setDoc} from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -14,14 +14,13 @@ const firebaseConfig = {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
-  const provider = new GoogleAuthProvider() ; 
-  provider.setCustomParameters({
+  const googleprovider = new GoogleAuthProvider() ; 
+  googleprovider.setCustomParameters({
      prompt: "select_account"
   });
 
   export const auth = getAuth() ; 
-  export const signInWithGooglePopup = () => signInWithPopup(auth, provider); 
-
+  export const signInWithGooglePopup = () => signInWithPopup(auth, googleprovider); 
   export const db = getFirestore() ;  //this is going to directly point to our database. 
 
   // this method aims to get the data that user uses while authenticating and store it in firestore. 
