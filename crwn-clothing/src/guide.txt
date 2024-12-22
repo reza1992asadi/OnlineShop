@@ -129,3 +129,15 @@ import {getfirestore, doc, getDoc, setDoc} from 'firebase/firestore'
 
 then we write export const db = getfirestore(); 
 we export it so we can use the database elsewhere;
+
+
+** there are a couple of things that I have learned that are super 
+crucial with git. for example if you want to delete all the uncommited 
+changes that you have made on your files and you have saved them on the
+editor, you can use git reset --hard but this permanantly deletes the 
+files. 
+
+the more  interesting option that I have learnt is this  command that 
+you can use to diregard the changes to a certain file. so the other 
+files will keep the changes. you can use git checkout -- <file path> this 
+is a very good option. 
