@@ -62,7 +62,7 @@ some config. this config is an object that allows us to attach firebase app inst
 instance that we have online. 
 
 then on firebase website project, you choose web, choose a name and set up your firbase web instance online
-then you  copy the config file and paste is bellow the import line. 
+then you  copy the config file and paste bellow is the import line. 
 
 const firebaseConfig = {
   apiKey: "AIzaSyDHmjungxBz6bebJi7tjAIHDx3NkQACD44",
@@ -78,7 +78,7 @@ const app = initializeApp(firebaseConfig);
 
 this will be how it looks, as you can see, 
 
-as said earlier, firbase suite has multiple features the next one thatf we want to imoprt depending on 
+as said earlier, firbase suite has multiple features the next one that we want to imoprt depending on 
 your needs is from 'firebase/auth' you get libraries such as getAuth, signinwithredirect, googlesignin
 githubsignin and things such as that. 
 
@@ -106,7 +106,7 @@ You create an instance of GoogleAuthProvider to configure Google sign-in setting
 
 signInWithPopup():
 
-This function is used to sign the user in through a popup.
+This method is used to sign the user in through a popup.
 It requires two things:
 The auth object (which manages Firebase Authentication).
 The provider (in this case, the GoogleAuthProvider), which tells Firebase that we want to use Google for authentication.
@@ -141,3 +141,51 @@ the more  interesting option that I have learnt is this  command that
 you can use to diregard the changes to a certain file. so the other 
 files will keep the changes. you can use git checkout -- <file path> this 
 is a very good option. 
+
+**** a few  words about routes *****
+yesterday I was thinking more about the routes in this project. and I 
+managed to understand more of the problem. initially I assumed we only
+use routes for whole pages and components for portions of the page. it 
+is true, however there is no written rule and you can use whatever way
+you think is more efficient for your project. for example in this project
+you have a navbar which appears on  top of every page. so the trick used
+here is to use nested routes  with the navbar route as the parent and 
+as the base. 
+
+const App = () => {
+  return (
+    <Routes>
+      <Route path='/' element= {<Navigation />}>
+        <Route index element= {<Home />} />
+        <Route path='shop' element={<Shop />} />
+        <Route path='signin' element={<SignIn />} />
+      </Route>
+    </Routes>
+);
+
+later when writing the navigation route(remember everything in react is 
+a component) you layout the form of the navbar and at the end you include
+<outlet /> when then the router library will pick up the line from it 
+and will render the next components in place of the outlet, so the outlet
+is like a placeholder for the rest of it(the children better to say).
+
+const Navigation = () => { 
+    return (
+      <Fragment>
+        <div className="navigation">
+          <Link className="logo-container" to='/'>
+            <CrwnLogo className="logo" />
+          </Link>
+          <div className="nav-links-container">
+            <Link className='nav-link' to='/shop'>
+              Shop
+            </Link>  
+            <Link className="signin-link" to='/signin'>
+              Sign in 
+            </Link>          
+          </div>
+        </div>
+        <Outlet /> **** checkout the <outlet /> here !!!!
+        </Fragment>
+    );
+  }; 
