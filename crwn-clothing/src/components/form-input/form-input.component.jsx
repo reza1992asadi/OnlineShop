@@ -6,9 +6,6 @@ const FormInput = ({label, ...otherProps}) => {
             <input className="form-input" {...otherProps} />
         </div>
     )
-    FormInput.defaultProps = {
-        value: '',
-      }
 }
 
 // const FormInput = ({label, ...otherProps}) => {

@@ -68,7 +68,7 @@ const SignUpForm = () => {
                  type='password'
                  required
                  onChange={handleChange}
-                 name='confirmpassword'
+                 name='confirmPassword'
                  value={confirmPassword}
                 />
                 <button type="submit">Sign Up</button>
