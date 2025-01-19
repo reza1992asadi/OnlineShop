@@ -9,7 +9,7 @@ const firebaseConfig = {
     storageBucket: "crown-clothing-db-cd733.firebasestorage.app",
     messagingSenderId: "850973645781",
     appId: "1:850973645781:web:a49aa77b934ee82d19fb5c"
-  };
+   };
   
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
@@ -24,7 +24,7 @@ const firebaseConfig = {
   export const db = getFirestore() ;  //this is going to directly point to our database. 
 
   // this method aims to get the data that user uses while authenticating and store it in firestore. 
-  export const createUserDocumentFromAuth = async (userAuth) => {
+  export const createUserDocumentFromAuth = async (userAuth, additionalInformation={}) => {
       const userDocRef = doc(db, 'users', userAuth.uid)
       console.log(userDocRef) ; 
       const userSnapshot = await getDoc(userDocRef);
@@ -38,7 +38,8 @@ const firebaseConfig = {
             await setDoc(userDocRef, {
                displayName, 
                email, 
-               createdAt
+               createdAt,
+               ...additionalInformation,
             });
          } catch(error) {
             console.log('error creating the user', error.message);
