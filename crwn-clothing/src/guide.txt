@@ -189,3 +189,17 @@ const Navigation = () => {
         </Fragment>
     );
   }; 
+
+
+
+
+**********************************************
+what is react context: let me give you an example, imagine after signing in you have your user data in an object. now this object might be 
+needed across our app by multiple components. one way is to pass it to the common root so it can be drilled down to other components. but 
+there is a proble with that. in this method many component might have access to our object which actually don't need it. so in this case
+it would be a good idea to store these kind of data somewhere which can be accessed when needed. this is called react context. 
+
+you usually define your needed variable as a state, so you could keep track of it and in case it changes, react could rerender accodrding to 
+the new state. 
+
+for writing a conditional statement in javascript: just keep this in mind ---> condition ? (if yes this is executed) : (if no this one)
