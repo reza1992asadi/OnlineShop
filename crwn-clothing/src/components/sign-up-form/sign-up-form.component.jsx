@@ -1,10 +1,12 @@
-import {useState, useContext} from 'react'; 
-import {createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from '../../utils/firebase/firebase.utils';
+import {useState} from 'react'; 
 import FormInput from '../form-input/form-input.component';
 import './sign-up-form.styles.scss' ; 
 import Button from '../button/button.component'; 
+import { signup } from '../../utils/collab.utils';
 
 const defaultFormFields = { 
+    firstname: '',
+    lastname: '', 
     displayName: '', 
     email:'', 
     password:'', 
@@ -13,7 +15,7 @@ const defaultFormFields = {
 
 const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields); 
-    const {displayName, email, password, confirmPassword} = formFields; 
+    const {firstname, lastname, displayName, email, password, confirmPassword} = formFields; 
 
     const resetFormfields = () => {
         setFormFields(defaultFormFields); 
@@ -27,15 +29,11 @@ const SignUpForm = () => {
             return;
         }
         try {
-            const {user} = await createAuthUserWithEmailAndPassword(email, password);
-            
-            // setCurrentUser(user); 
-
-            await createUserDocumentFromAuth(user, {displayName})
+                const result = await signup(firstname, lastname, displayName, email, password);
+                console.log("sign up success:", result);
+              } catch (error) {
+                console.error("sign up failed:", error.message);}
             resetFormfields(); 
-        }catch(error){
-            console.log('user creation encoutnered an error', error); 
-        }
     }
     
     const handleChange = (event) => {
@@ -48,6 +46,22 @@ const SignUpForm = () => {
             <h2>Don't have an account?</h2>
             <span>Sign up with your email and password</span>
             <form onSubmit={handleSubmit}>
+                <FormInput 
+                label="First Name"
+                type="text"
+                required
+                onChange={handleChange}
+                name='firstname'
+                value={firstname}
+                />
+                <FormInput 
+                label ="Last Name"
+                type="text"
+                required
+                onChange={handleChange}
+                name='lastname'
+                value={lastname}
+                />
                 <FormInput 
                 label="Display Name"
                 type='text'

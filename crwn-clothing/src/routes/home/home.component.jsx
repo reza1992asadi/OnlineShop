@@ -1,4 +1,5 @@
 import CategoryMenu from '../../components/category-menu/category-menu.component';
+
 const Home = () => {
 const categories = [
     {
