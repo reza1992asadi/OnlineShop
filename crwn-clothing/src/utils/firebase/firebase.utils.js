@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app' ; 
 import {getAuth, signInWithPopup , GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged} from 'firebase/auth' ; 
-import {getFirestore,doc,getDoc,setDoc} from 'firebase/firestore';
+import {getFirestore,doc, getDoc,setDoc, getDocs, collection, writeBatch} from 'firebase/firestore';
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyDHmjungxBz6bebJi7tjAIHDx3NkQACD44",
@@ -61,3 +62,39 @@ const firebaseConfig = {
   export const signOutUser = async ()  => signOut (auth);
 
   export const onAuthStateChangedListner = (callback) => onAuthStateChanged(auth, callback); 
+
+
+  //this will fetch data from database 
+  export const addCollectionAndDocuments = async (collectionKey,objectsToAdd) => {
+      const collectionRef = collection (db, collectionKey); 
+      const batch = writeBatch(db); 
+
+      objectsToAdd.forEach((object) => {
+         const docRef = doc(collectionRef.object.title.toLowerCase()); 
+         batch.set(docRef, object);
+      });
+      await batch.commit(); 
+      console.log('done'); 
+  };
+
+// this is a script to write our data to our database. 
+
+// const uploadShopData = async () => {
+//    const collectionRef = collection(db, 'categories');
+//    const batch = writeBatch(db);
+ 
+//    SHOP_DATA.forEach((category) => {
+//      const docRef = doc(collectionRef, category.title.toLowerCase());
+//      batch.set(docRef, category);
+//    });
+ 
+//    try {
+//      await batch.commit();
+//      console.log('Shop data uploaded successfully!');
+//    } catch (error) {
+//      console.error('Error uploading shop data:', error);
+//    }
+//  };
+
+//  export default uploadShopData; 
+ 

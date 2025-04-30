@@ -1,0 +1,13 @@
+ok I managed to correct the drop down cart. what I did was I used openCart state in both cart-icon and cartdrop down components. 
+so the idea is cartOpen state is changed when cart-icon is clicked. when the state is changed, we get to know about it in cart-dropdown component too.
+since its a state declared in context. there is conditional rendering there, when state is true, cart-drop down is rendered. for cart drop-down only
+the state is necessary. for the cart-icon both state and the setter should be imported from the context. 
+
+now what is the next step? the next step is when you click add to cart on the products in your app, they appear on your cart. this is the hard part. 
+but how can we do it? we already have a cart-item component. a cart-item component, has a picture, name, price and quantity. 3 of those attributes 
+can be taken directly from the product itself, it has picture, it has name and price. so you gotta figure out a way, so when ever we click an item's
+button, these attribute are passed plus a quantity. now here are the questions. where should this process happen? think about this for a while.
+
+lets say in productCard component. we write the function, what should the function have? it will have several conditions, if its the firt product, 
+it should be added  with quantity 1, when its more than one(already in cart), only the quantity should increase. is there any other condition, 
+that we should be aware of? 

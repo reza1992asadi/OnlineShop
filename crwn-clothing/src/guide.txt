@@ -203,3 +203,54 @@ you usually define your needed variable as a state, so you could keep track of i
 the new state. 
 
 for writing a conditional statement in javascript: just keep this in mind ---> condition ? (if yes this is executed) : (if no this one)
+
+***********************************************
+when to use Side Effect? 
+.fetching data from an API 
+.setting up even listenere 
+.working with settimeout/set interval
+.syncying data with local storage or the URLs
+
+benefits: keeps side Effects separated from rendering 
+logic: 
+=====> prevents repeated/ unnecessary code 
+=====> you control when the effect runs (with the dependency array)
+
+*********************************************
+keep in mind, jsx should be only for rendering not logic execution. try to avoid it as much as you can. for example .map .filter are ok. 
+but if statements or for should not be in the JSX. 
+********************************************
+Always return a single item per iteration
+Think of .map() as: “Take every item in the array, transform it, and return the new array.”
+
+Don’t use .map() for side effects
+If you’re trying to conditionally remove an item or do side-effect logic, use .filter() or regular iteration.
+
+Use clear return statements
+When you have multiple conditions inside .map(), use return on every path, or wrap in a full return block to avoid confusion:
+********************************************
+ Layout Tip (Centering Content)
+Use a wrapper div to handle layout and centering.
+Keep the inner component focused on content and sizing.
+
+✅ Structure:
+
+<div className="page-wrapper">
+  <div className="component-container">
+    {/* content */}
+  </div>
+</div>
+
+✅ CSS:
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.component-container {
+  width: 70%;
+  max-width: 1000px;
+}
+********************************************
