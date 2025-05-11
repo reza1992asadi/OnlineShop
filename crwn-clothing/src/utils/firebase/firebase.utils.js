@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app' ; 
 import {getAuth, signInWithPopup , GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged} from 'firebase/auth' ; 
-import {getFirestore,doc, getDoc,setDoc, getDocs, collection, writeBatch} from 'firebase/firestore';
+import {getFirestore,doc, getDoc,setDoc, getDocs, collection, writeBatch, QuerySnapshot, DocumentSnapshot, query} from 'firebase/firestore';
 
 
 const firebaseConfig = {
@@ -63,19 +63,31 @@ const firebaseConfig = {
 
   export const onAuthStateChangedListner = (callback) => onAuthStateChanged(auth, callback); 
 
+  export const getCategoriesAndDocuments = async () => {
+   const collectionRef = collection(db, 'categories'); 
+   const q = query(collectionRef); 
+   const querySnapshot = await getDocs(q); 
+
+   const categoryMap = querySnapshot.docs.reduce((acc,docSnapshot)=> {
+      const {title,items} = docSnapshot.data();
+      acc[title.toLowerCase()] = {title, items};
+      return acc;
+   }, {}); 
+   return categoryMap; 
+  };
 
   //this will fetch data from database 
-  export const addCollectionAndDocuments = async (collectionKey,objectsToAdd) => {
-      const collectionRef = collection (db, collectionKey); 
-      const batch = writeBatch(db); 
+//   export const addCollectionAndDocuments = async (collectionKey,objectsToAdd) => {
+//       const collectionRef = collection (db, collectionKey); 
+//       const batch = writeBatch(db); 
 
-      objectsToAdd.forEach((object) => {
-         const docRef = doc(collectionRef.object.title.toLowerCase()); 
-         batch.set(docRef, object);
-      });
-      await batch.commit(); 
-      console.log('done'); 
-  };
+//       objectsToAdd.forEach((object) => {
+//          const docRef = doc(collectionRef.object.title.toLowerCase()); 
+//          batch.set(docRef, object);
+//       });
+//       await batch.commit(); 
+//       console.log('done'); 
+//   };
 
 // this is a script to write our data to our database. 
 
