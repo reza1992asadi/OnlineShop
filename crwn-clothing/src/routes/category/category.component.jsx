@@ -10,18 +10,18 @@ import './category.styles.scss';
 const Category = () => {
   const { category } = useParams();
   const { categoriesMap } = useContext(CategoriesContext);
-  const [products, setProducts] = useState(categoriesMap[category]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    setProducts(categoriesMap[category]);
+    if(categoriesMap && categoriesMap[category])
+    setProducts(categoriesMap[category].items);
   }, [category, categoriesMap]);
 
   return (
     <Fragment>
       <h2 className='category-title'>{category.toUpperCase()}</h2>
       <div className='category-container'>
-        {products &&
-          products.map((product) => (
+        {products && products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
       </div>
